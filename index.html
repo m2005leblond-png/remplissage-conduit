@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Remplissage de conduit</title>
+
+  <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="manifest.json">
+
+  <meta name="theme-color" content="#1e88e5">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+</head>
+
+<body>
+
+  <h1>Calcul de remplissage de conduit</h1>
+
+  <label for="typeConduit">Type de conduit</label>
+  <select id="typeConduit">
+    <option value="CONDUIT EMT">CONDUIT EMT</option>
+    <option value="CONDUIT RIGID">CONDUIT RIGID</option>
+    <option value="CONDUIT MÉTALLIQUE FLEX">CONDUIT MÉTALLIQUE FLEX</option>
+    <option value="CONDUIT MÉTALLIQUE FLEX ÉTANCHE">CONDUIT MÉTALLIQUE FLEX ÉTANCHE</option>
+    <option value="CONDUIT PVC RIGIDE">CONDUIT PVC RIGIDE</option>
+    <option value="CONDUIT PVC EB1/BD2">CONDUIT PVC EB1/BD2</option>
+    <option value="CONDUIT NON-MÉTAL FLEX ÉTANCHE">CONDUIT NON-MÉTAL FLEX ÉTANCHE</option>
+  </select>
+
+  <label for="nbFils">% de remplissage voulu</label>
+  <select id="nbFils">
+    <option value="1">53 %</option>
+    <option value="2">31 %</option>
+    <option value="3" selected>40 %</option>
+    <option value="4">38 %</option>
+    <option value="5">35 %</option>
+    <option value="6">31 %</option>
+    <option value="7">30 %</option>
+  </select>
+
+  <label for="categorieCable">Type de câble</label>
+  <select id="categorieCable">
+    <option value="RW">RW</option>
+    <option value="RWU">RWU</option>
+    <option value="FAS">FAS</option>
+    <option value="FAS VITALINK">FAS VITALINK</option>
+    <option value="CONTROLE">CONTRÔLE</option>
+  </select>
+
+  <hr>
+
+  <h2>Ajouter un câble</h2>
+  <div class="ligne-ajout">
+    <input type="number" id="quantite" min="1" placeholder="Qté">
+    <select id="typeCable" class="champ-placeholder">
+      <option value="">Câble</option>
+    </select>
+    <button id="btnAjouter" disabled>+</button>
+  </div>
+
+  <hr>
+
+  <h2>Câbles ajoutés</h2>
+  <ul id="listeCables"></ul>
+  <button id="viderListe">Vider la liste</button>
+
+  <hr>
+
+  <h2>Résultats</h2>
+  <div id="resultat">Ajoute des câbles pour voir les résultats.</div>
+  <button id="btnPdf">Exporter en PDF</button>
+
+  <div id="pdfHeader" style="display:none;">
+    <h1>Rapport de remplissage de conduit</h1>
+    <hr>
+    <div id="pdfContent"></div>
+  </div>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+
+  <script>
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("./service-worker.js")
+          .then(reg => console.log("Service Worker enregistré avec succès !", reg.scope))
+          .catch(err => console.error("Échec de l'enregistrement du Service Worker :", err));
+      });
+    }
+  </script>
+
+</body>
+</html>

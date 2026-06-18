@@ -1,0 +1,190 @@
+/* ===============================
+   AFFICHAGE NORMAL (ÉCRAN)
+================================ */
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  max-width: 700px;
+  margin: auto;
+  padding: 20px;
+}
+
+label {
+  font-weight: bold;
+  display: block;
+  margin-top: 15px;
+}
+
+select,
+input,
+button {
+  font-size: 16px;
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #999;
+}
+
+/* Placeholders uniformes */
+input::placeholder {
+  color: #9e9e9e;
+  opacity: 1;
+}
+
+select.champ-placeholder {
+  color: #9e9e9e;
+}
+
+select:not(.champ-placeholder) {
+  color: #000;
+}
+
+/* Ligne d'ajout */
+.ligne-ajout {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+#quantite {
+  width: 6ch;
+  text-align: center;
+}
+
+#typeCable {
+  flex: 1;
+}
+
+/* Bouton + */
+#btnAjouter {
+  width: 40px;
+  height: 40px;
+  font-size: 22px;
+  font-weight: bold;
+  background: #1e88e5;
+  color: white;
+  border: none;
+}
+
+#btnAjouter:disabled {
+  background: #cccccc !important;
+  color: #666 !important;
+  cursor: not-allowed;
+}
+
+/* Liste des câbles */
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+.ligne-cable {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.ligne-cable input {
+  width: 6ch;
+  text-align: center;
+}
+
+.texte-cable {
+  flex: 1;
+}
+
+/* Bouton X */
+.ligne-cable button {
+  width: 32px;
+  height: 32px;
+  background: #d32f2f;
+  color: white;
+  font-size: 20px;
+  border: none;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  cursor: pointer;
+}
+
+
+/* Résultats */
+#resultat {
+  background: #f3f3f3;
+  padding: 12px;
+  border-radius: 6px;
+  margin-top: 10px;
+}
+
+/* Espace entre Résultats et bouton Exporter PDF */
+#btnPdf {
+  margin-top: 20px;
+}
+
+/* ===============================
+   MODE IMPRESSION / PDF
+================================ */
+@media print {
+
+  body {
+    margin: 0;
+    padding: 20px;
+    color: #000;
+  }
+
+  body * {
+    display: none !important;
+  }
+
+  #pdfHeader,
+  #pdfHeader * {
+    display: block !important;
+  }
+
+  hr {
+    border: none;
+    border-top: 2px solid #000;
+    margin: 20px 0;
+  }
+
+  #pdfHeader ul {
+    list-style: none;
+    padding-left: 0;
+  }
+
+  #pdfHeader li::before {
+    content: "• ";
+  }
+}
+
+/* Icônes Unicode */
+.icone-erreur, .icone-ok {
+  font-family: "Segoe UI Emoji", "Noto Color Emoji", "Segoe UI Symbol", sans-serif;
+  font-size: 1.2em;
+  vertical-align: middle;
+}
+.ligne-cable button {
+  font-family: "Segoe UI", "Arial", sans-serif;
+}
+@media print {
+  ul, li {
+    list-style: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  li {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    gap: 10px !important;
+  }
+
+  li span {
+    display: inline-block !important;
+    white-space: nowrap !important;
+  }
+}
+
