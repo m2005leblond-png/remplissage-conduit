@@ -1,4 +1,4 @@
-const CACHE_NAME = "remplissage-conduit-v27"; // Version augmentée pour forcer la mise à jour
+const CACHE_NAME = "remplissage-conduit-v28"; // Version augmentée pour forcer la mise à jour
 
 const FILES_TO_CACHE = [
   "./",
