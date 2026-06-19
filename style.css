@@ -67,11 +67,10 @@ select, input[type="number"] {
   background-color: var(--card-bg);
   font-size: 1rem;
   color: var(--text-color);
-  appearance: none; /* Enlève le style natif sur mobile */
+  appearance: none;
   -webkit-appearance: none;
 }
 
-/* Flèche personnalisée pour les menus déroulants */
 select {
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'><path fill='%23333' d='M0 0l5 5 5-5z'/></svg>");
   background-repeat: no-repeat;
@@ -80,12 +79,10 @@ select {
   padding-right: 35px;
 }
 
-/* Style de simulation du placeholder pour le select "Câble" */
 .champ-placeholder {
   color: #888888;
 }
 
-/* Zone d'ajout de câble sur une seule ligne */
 .ligne-ajout {
   display: flex;
   gap: 10px;
@@ -102,7 +99,6 @@ select {
   flex: 3;
 }
 
-/* Boutons */
 button {
   padding: 12px 20px;
   font-size: 1rem;
@@ -139,8 +135,15 @@ button {
   width: 100%;
 }
 
-#viderListe:hover {
+#viderListe:hover:not(:disabled) {
   background-color: #ffebee;
+}
+
+#viderListe:disabled {
+  background-color: #f0f0f0;
+  color: #cccccc;
+  border-color: #cccccc;
+  cursor: not-allowed;
 }
 
 #btnPdf {
@@ -197,17 +200,14 @@ button {
    4. STYLING POUR L'IMPRESSION PDF
    ========================================================================== */
 @media print {
-  /* Cache l'ensemble de l'interface de l'application à l'écran */
   body * {
     display: none !important;
   }
 
-  /* Force l'affichage unique du conteneur de rapport */
   #pdfHeader, #pdfHeader * {
     display: block !important;
   }
 
-  /* Structure de la page blanche d'impression */
   #pdfHeader {
     display: block !important;
     width: 100%;
