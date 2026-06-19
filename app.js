@@ -1,5 +1,5 @@
 // ==========================================
-// 1. BASE DE DONNÉES INTÉGRÉE DIRECTEMENT
+// 1. BASE DE DONNÉES INTEGRÉE
 // ==========================================
 const seuilsRemplissage = {
   1: 0.55, 2: 0.53, 3: 0.40, 4: 0.38, 5: 0.35, 6: 0.31, 7: 0.30
@@ -92,7 +92,7 @@ const cablesParType = {
 };
 
 // ==========================================
-// 2. LOGIQUE DE GESTION DE L'APPLICATION
+// 2. LOGIQUE DE L'APPLICATION
 // ==========================================
 let liste = [];
 
@@ -154,6 +154,9 @@ function ajouterCable() {
   typeCable.value = "";
   typeCable.classList.add("champ-placeholder");
   
+  // Désactive la coloration rouge du menu après l'ajout
+  categorieCable.classList.remove("option-rouge");
+  
   verifierBoutonAjouter();
   verifierBoutonVider();
   afficherListe();
@@ -178,11 +181,11 @@ window.supprimerCable = function(i) {
 };
 
 function calculer() {
+  const pdfContent = document.getElementById("pdfContent");
+  
   if (!liste.length) {
     resultat.textContent = "Ajoute des câbles pour voir les résultats.";
-    if (document.getElementById("pdfContent")) {
-      document.getElementById("pdfContent").innerHTML = "";
-    }
+    if (pdfContent) pdfContent.innerHTML = "";
     return;
   }
 
@@ -216,11 +219,11 @@ function calculer() {
 
   resultat.innerHTML = texteResultat;
 
-  const pdfContent = document.getElementById("pdfContent");
   if (pdfContent) {
     pdfContent.innerHTML = `
       <p><strong>Type de conduit sélectionné :</strong> ${typeConduitSelect.value}</p>
       <p><strong>% de remplissage ciblé :</strong> ${nbFils.options[nbFils.selectedIndex].text}</p>
+      <br>
       <h3>Liste des câbles inclus :</h3>
       <ul>${detailCablesHtml}</ul>
       <hr>
@@ -231,7 +234,16 @@ function calculer() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  categorieCable.addEventListener("change", chargerCables);
+  
+  categorieCable.addEventListener("change", () => {
+    chargerCables();
+    // Gestion de l'état rouge persistant sur sélection
+    if (categorieCable.value === "FAS VITALINK") {
+      categorieCable.classList.add("option-rouge");
+    } else {
+      categorieCable.classList.remove("option-rouge");
+    }
+  });
   
   typeCable.addEventListener("change", () => {
     if (typeCable.value !== "") {
@@ -250,6 +262,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (viderListe) {
     viderListe.addEventListener("click", () => {
       liste = [];
+      categorieCable.classList.remove("option-rouge");
       afficherListe();
       calculer();
       verifierBoutonVider();
