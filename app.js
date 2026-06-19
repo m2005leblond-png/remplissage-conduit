@@ -20,7 +20,8 @@ const conduitsParType = {
   "CONDUIT MÉTALLIQUE FLEX": [
     { nom: '1/2"', section: 202 }, { nom: '3/4"', section: 354 }, { nom: '1"', section: 573 },
     { nom: '1-1/4"', section: 985 }, { nom: '1-1/2"', section: 1336 }, { nom: '2"', section: 2199 },
-    { nom: '2-1/2"', section: 3139 }, { nom: '3"', section: 4839 }, { nom: '3-1/2"', section: 6458 }, { nom: '4"', section: 8311 }
+    { nom: '2-1/2"', section: 3139 }, { nom: '3"', section: 4839 }, { nom: '3-1/2"', section: 6458 },
+    { nom: '4"', section: 8311 }
   ],
   "CONDUIT MÉTALLIQUE FLEX ÉTANCHE": [
     { nom: '3/8"', section: 119 }, { nom: '1/2"', section: 196 }, { nom: '3/4"', section: 341 },
@@ -106,6 +107,7 @@ const nbFils = document.getElementById("nbFils");
 const viderListe = document.getElementById("viderListe");
 const typeConduitSelect = document.getElementById("typeConduit");
 const btnPdf = document.getElementById("btnPdf");
+const alerteZoneSecurisee = document.getElementById("alerteZoneSecurisee");
 
 function chargerCables() {
   typeCable.innerHTML = '<option value="">Câble</option>';
@@ -154,8 +156,10 @@ function ajouterCable() {
   typeCable.value = "";
   typeCable.classList.add("champ-placeholder");
   
-  // Désactive la coloration rouge du menu après l'ajout
-  categorieCable.classList.remove("option-rouge");
+  // Cache la zone d'alerte rouge après l'ajout du câble
+  if (alerteZoneSecurisee) {
+    alerteZoneSecurisee.style.display = "none";
+  }
   
   verifierBoutonAjouter();
   verifierBoutonVider();
@@ -237,11 +241,14 @@ document.addEventListener("DOMContentLoaded", () => {
   
   categorieCable.addEventListener("change", () => {
     chargerCables();
-    // Gestion de l'état rouge persistant sur sélection
-    if (categorieCable.value === "FAS VITALINK") {
-      categorieCable.classList.add("option-rouge");
-    } else {
-      categorieCable.classList.remove("option-rouge");
+    
+    // ✅ GESTION DYNAMIQUE DE L'AFFICHAGE DU TEXTE ROUGE COMPLÉMENTAIRE
+    if (alerteZoneSecurisee) {
+      if (categorieCable.value === "FAS VITALINK") {
+        alerteZoneSecurisee.style.display = "block";
+      } else {
+        alerteZoneSecurisee.style.display = "none";
+      }
     }
   });
   
@@ -262,7 +269,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (viderListe) {
     viderListe.addEventListener("click", () => {
       liste = [];
-      categorieCable.classList.remove("option-rouge");
+      if (alerteZoneSecurisee) alerteZoneSecurisee.style.display = "none";
       afficherListe();
       calculer();
       verifierBoutonVider();
