@@ -67,7 +67,7 @@ const cablesParType = {
     "350 MCM RWU": { section: 408.6 }, "400 MCM RWU": { section: 455 }, "450 MCM RWU": { section: 498.4 },
     "500 MCM RWU": { section: 540.8 }, "600 MCM RWU": { section: 661.4 }, "700 MCM RWU": { section: 746 },
     "750 MCM RWU": { section: 788.7 }, "800 MCM RWU": { section: 831.1 }, "900 MCM RWU": { section: 914.9 },
-    "1000 MCM RWU": { section: 995.5 }, "1250 MCM MCM RWU": { section: 1199 }, "1500 MCM RWU": { section: 1449 },
+    "1000 MCM RWU": { section: 995.5 }, "1250 MCM RWU": { section: 1199 }, "1500 MCM RWU": { section: 1449 },
     "1750 MCM RWU": { section: 1652 }, "2000 MCM RWU": { section: 1851 }
   },
   "FAS": {
@@ -134,7 +134,13 @@ function chargerCables() {
 }
 
 function verifierBoutonAjouter() {
-  btnAjouter.disabled = !(Number(quantite.value) > 0 && typeCable.value);
+  btnAjouter.disabled = !(Number(quantite.value) > 0 && typeCable.value !== "");
+}
+
+function verifierBoutonVider() {
+  if (viderListe) {
+    viderListe.disabled = (liste.length === 0);
+  }
 }
 
 function ajouterCable() {
@@ -147,6 +153,9 @@ function ajouterCable() {
   quantite.value = "";
   typeCable.value = "";
   typeCable.classList.add("champ-placeholder");
+  
+  verifierBoutonAjouter();
+  verifierBoutonVider();
   afficherListe();
   calculer();
 }
@@ -163,6 +172,7 @@ function afficherListe() {
 
 window.supprimerCable = function(i) {
   liste.splice(i, 1);
+  verifierBoutonVider();
   afficherListe();
   calculer();
 };
@@ -237,11 +247,14 @@ document.addEventListener("DOMContentLoaded", () => {
   typeConduitSelect.addEventListener("change", calculer);
   nbFils.addEventListener("change", calculer);
 
-  viderListe.addEventListener("click", () => {
-    liste = [];
-    afficherListe();
-    calculer();
-  });
+  if (viderListe) {
+    viderListe.addEventListener("click", () => {
+      liste = [];
+      afficherListe();
+      calculer();
+      verifierBoutonVider();
+    });
+  }
 
   if (btnPdf) {
     btnPdf.addEventListener("click", () => {
@@ -251,4 +264,6 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   chargerCables();
+  verifierBoutonAjouter();
+  verifierBoutonVider();
 });
