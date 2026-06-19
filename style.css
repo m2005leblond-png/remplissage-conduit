@@ -157,6 +157,19 @@ button {
   background-color: #388e3c;
 }
 
+/* Style de coloration pour FAS VITALINK */
+#categorieCable option[value="FAS VITALINK"] {
+  color: var(--danger-color);
+  font-weight: bold;
+}
+
+.option-rouge {
+  color: var(--danger-color) !important;
+  font-weight: bold !important;
+  border-color: var(--danger-color) !important;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'><path fill='%23e53935' d='M0 0l5 5 5-5z'/></svg>") !important;
+}
+
 /* ==========================================================================
    3. LISTE DES CÂBLES & RÉSULTATS
    ========================================================================== */
