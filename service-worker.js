@@ -1,4 +1,4 @@
-const CACHE_NAME = "remplissage-conduit-v26";
+const CACHE_NAME = "remplissage-conduit-v27";
 
 // AJOUT : Inclusion de style.css, app.js et data.js dès le départ
 const FILES_TO_CACHE = [
