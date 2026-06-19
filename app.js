@@ -67,7 +67,7 @@ const cablesParType = {
     "350 MCM RWU": { section: 408.6 }, "400 MCM RWU": { section: 455 }, "450 MCM RWU": { section: 498.4 },
     "500 MCM RWU": { section: 540.8 }, "600 MCM RWU": { section: 661.4 }, "700 MCM RWU": { section: 746 },
     "750 MCM RWU": { section: 788.7 }, "800 MCM RWU": { section: 831.1 }, "900 MCM RWU": { section: 914.9 },
-    "1000 MCM RWU": { section: 995.5 }, "1250 MCM RWU": { section: 1199 }, "1500 MCM RWU": { section: 1449 },
+    "1000 MCM RWU": { section: 995.5 }, "1250 MCM MCM RWU": { section: 1199 }, "1500 MCM RWU": { section: 1449 },
     "1750 MCM RWU": { section: 1652 }, "2000 MCM RWU": { section: 1851 }
   },
   "FAS": {
@@ -161,7 +161,6 @@ function afficherListe() {
   });
 }
 
-// Rendre la fonction accessible au bouton HTML
 window.supprimerCable = function(i) {
   liste.splice(i, 1);
   afficherListe();
@@ -171,6 +170,9 @@ window.supprimerCable = function(i) {
 function calculer() {
   if (!liste.length) {
     resultat.textContent = "Ajoute des câbles pour voir les résultats.";
+    if (document.getElementById("pdfContent")) {
+      document.getElementById("pdfContent").innerHTML = "";
+    }
     return;
   }
 
@@ -183,23 +185,41 @@ function calculer() {
   }
 
   let sectionTotale = 0;
+  let detailCablesHtml = "";
+
   liste.forEach(c => {
     if (cablesParType[c.categorie] && cablesParType[c.categorie][c.type]) {
-      sectionTotale += cablesParType[c.categorie][c.type].section * c.qte;
+      const secUnitaire = cablesParType[c.categorie][c.type].section;
+      sectionTotale += secUnitaire * c.qte;
+      detailCablesHtml += `<li>${c.qte} × ${c.type} (${(secUnitaire * c.qte).toFixed(2)} mm²)</li>`;
     }
   });
 
   const conduit = conduits.find(c => sectionTotale <= c.section * facteur);
 
+  let texteResultat = "";
   if (!conduit) {
-    resultat.innerHTML = "<span style='color:red; font-weight:bold;'>❌ OVER (Hors limites)</span>";
-    return;
+    texteResultat = "<span style='color:red; font-weight:bold;'>❌ OVER (Hors limites)</span>";
+  } else {
+    texteResultat = `✅ Section totale : <strong>${sectionTotale.toFixed(2)} mm²</strong><br>✅ Taille minimale du conduit : <strong>${conduit.nom}</strong>`;
   }
 
-  resultat.innerHTML = `✅ Section totale : <strong>${sectionTotale.toFixed(2)} mm²</strong><br>✅ Taille minimale du conduit : <strong>${conduit.nom}</strong>`;
+  resultat.innerHTML = texteResultat;
+
+  const pdfContent = document.getElementById("pdfContent");
+  if (pdfContent) {
+    pdfContent.innerHTML = `
+      <p><strong>Type de conduit sélectionné :</strong> ${typeConduitSelect.value}</p>
+      <p><strong>% de remplissage ciblé :</strong> ${nbFils.options[nbFils.selectedIndex].text}</p>
+      <h3>Liste des câbles inclus :</h3>
+      <ul>${detailCablesHtml}</ul>
+      <hr>
+      <h3>Résultats du calcul :</h3>
+      <p>${texteResultat}</p>
+    `;
+  }
 }
 
-// Initialisation des événements au chargement du DOM
 document.addEventListener("DOMContentLoaded", () => {
   categorieCable.addEventListener("change", chargerCables);
   
@@ -224,9 +244,11 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   if (btnPdf) {
-    btnPdf.addEventListener("click", () => { window.print(); });
+    btnPdf.addEventListener("click", () => {
+      calculer();
+      window.print();
+    });
   }
 
-  // Lancement forcé au démarrage
   chargerCables();
 });
