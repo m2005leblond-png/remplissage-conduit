@@ -144,9 +144,17 @@ function calculer() {
    EVENTS INITIALISATION
 ================================ */
 document.addEventListener("DOMContentLoaded", () => {
-  categorieCable.addEventListener("change", chargerCables);
+  // Déclencher le chargement dès le clic sur le changement de catégorie
+  categorieCable.addEventListener("change", () => {
+    chargerCables();
+  });
+
   typeCable.addEventListener("change", () => {
-    if(typeCable.value !== "") typeCable.classList.remove("champ-placeholder");
+    if (typeCable.value !== "") {
+      typeCable.classList.remove("champ-placeholder");
+    } else {
+      typeCable.classList.add("champ-placeholder");
+    }
     verifierBoutonAjouter();
   });
   
@@ -168,6 +176,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // APPEL INITIAL OBLIGATOIRE
+  // ✅ APPEL INITIAL : Force le chargement des câbles selon la catégorie sélectionnée par défaut (RW)
   chargerCables();
 });
