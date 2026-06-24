@@ -80,7 +80,14 @@ const cablesParType = {
     "14/2 FAS (SH)": { section: 32.69 }, "14/3 FAS (SH)": { section: 37.76 }, "14/5 FAS (SH)": { section: 49.33 }
   },
   "FAS VITALINK": {
-    "16/3 FAS VITALINK": { section: 61.38 }, "14/3 FAS VITALINK": { section: 77.44 }, "16/2 FAS (TW-SH) VITALINK": { section: 55.15 }
+    "18/2 - VITALink FAS_CIC_FA1802": { section: 47.05 }, "18/3 - VITALink FAS_CIC_FA1803": { section: 54.50 }, "16/2 - VITALink FAS_CIC_FA1602": { section: 52.17 }
+    "16/3 - VITALink FAS_CIC_FA1603": { section: 61.38 }, "16/4 - VITALink FAS_CIC_FA1604": { section: 78.70 }, "16/8 - VITALink FAS_CIC_FA1608": { section: 131.71 }
+    "14/2 - VITALink FAS_CIC_FA1402": { section: 62.77 }, "14/3 - VITALink FAS_CIC_FA1403": { section: 77.44 }, "14/4 - VITALink FAS_CIC_FA1404": { section: 91.95 }
+    "14/8 - VITALink FAS_CIC_FA1408": { section: 169.26 }, "12/2 - VITALink FAS_CIC_FA1202": { section: 81.71 }, "12/8 - VITALink FAS_CIC_FA1208": { section: 186.75 }
+    "18/2 SH - VITALink FAS_CIC_FA1802S": { section: 48.40 }, "18/3 SH - VITALink FAS_CIC_FA1803S": { section: 55.55 }, "16/2 SH - VITALink FAS_CIC_FA1602S": { section: 55.15 }
+    "16/3 SH - VITALink FAS_CIC_FA1603S": { section: 63.19 }, "16/4 SH - VITALink FAS_CIC_FA1604S": { section: 81.07 }, "16/6 SH - VITALink FAS_CIC_FA1606S": { section: 114.80 }
+    "16/8 SH - VITALink FAS_CIC_FA1608S": { section: 134.99 }, "14/2 SH - VITALink FAS_CIC_FA1402S": { section: 65.18 }, "14/3 SH - VITALink FAS_CIC_FA1403S": { section: 79.80 }
+    "14/6 SH - VITALink FAS_CIC_FA1406S": { section: 134.99 }
   },
   "CONTROLE": {
     "3c22(SH)FT6 Orange": { section: 17.53 }, "2c18 FT6 Orange": { section: 12.97 }, "3c18 FT6 Orange": { section: 15.69 },
