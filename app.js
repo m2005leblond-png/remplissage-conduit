@@ -90,12 +90,16 @@ const cablesParType = {
     "14/6 SH - VITALink FAS_CIC_FA1406S": { section: 134.99 }
   },
     "CONTROLE FT4": {
-    "3c22(SH)FT6 Orange": { section: 17.53 }, "2c18 FT6 Orange": { section: 12.97 }, "3c18 FT6 Orange": { section: 15.69 },
-    "4c18 FT6 Orange": { section: 30.66 }, "6c18 FT6 Orange": { section: 38.32 }, "CAT6 FT6 Orange": { section: 24.54 },
-    "4c22 FT6 Gris": { section: 10.07 }, "6c22 FT6 Gris": { section: 14.3 }, "8c22 FT6 Gris": { section: 17.53 },
-    "12c22 FT6 Gris": { section: 21.09 }, "2pr22(TW/SH) FT6 Gris": { section: 26.8 }, "4c18 FT6 Gris": { section: 17.16 },
-    "6c18 FT6 Gris": { section: 22.35 }, "8c18 FT6 Gris": { section: 28.70 }, "10c18 FT6 Gris": { section: 36.39 },
-    "2c14 FT6 Gris": { section: 23 }, "2c12 FT6 Gris": { section: 30.92 }
+    "1pr24 SH FT4 - 8250": { section: 13.30 }, "2pr24 SH FT4 - 8251": { section: 25.88 }, "1pr22 FT4 - 8230": { section: 12.17 },
+    "1pr22 Echelon FT4 - 8229": { section: 11.71 }, "1pr22 SH FT4 - 8240": { section: 10.22 }, "1pr22 SH 108 Ohms FT4 - 8247": { section: 14.99 },
+    "1tr22 SH FT4 - 8241": { section: 11.40 }, "1tr22 SH 108 Ohms FT4 - 8248": { section: 20.47 }, "4c22 SH Thermocom FT4 - 8242": { section: 13.46 },
+    "3pr22 FT4 - 8233": { section: 25.20 }, "1pr20 FT4 - 8220": { section: 10.80 }, "1pr20 SH FT4 - 8224": { section: 12.65 },
+    "1tr20 FT4 - 8221": { section: 12.17 }, "2pr20 FT4 - 8222": { section: 30.66 }, "1pr18 FT4 - 8200": { section: 15.70 },
+    "1pr18 SH FT4 - 8210": { section: 16.05 }, "1tr18 FT4 - 8201": { section: 17.72 }, "1tr18 SH FT4 - 8211": { section: 18.10 },
+    "2pr18 SH FT4 - 8212": { section: 37.21 }, "4c18 FT4 - 8202": { section: 22.35 }, "6pr18 SH FT4 - 8254": { section: 95.44 },
+    "1pr16 FT4 - 8190": { section: 30.66 }, "1pr16 SH FT4 - 8217": { section: 26.57 }, "1tr16 FT4 - 8191": { section: 29.19 },
+    "1pr14 FT4 - 8180": { section: 36.39 }, "CAT5e FT6": { section: 24.52 }, "CAT6 FT6": { section: 31.67 },
+    "CAT6a FT6": { section: 55.18 }
   },
   "CONTROLE FT6": {
     "3c22(SH)FT6 Orange": { section: 17.53 }, "2c18 FT6 Orange": { section: 12.97 }, "3c18 FT6 Orange": { section: 15.69 },
