@@ -102,12 +102,19 @@ const cablesParType = {
     "CAT6a FT6": { section: 55.18 }
   },
   "CONTROLE FT6": {
-    "3c22(SH)FT6 Orange": { section: 17.53 }, "2c18 FT6 Orange": { section: 12.97 }, "3c18 FT6 Orange": { section: 15.69 },
-    "4c18 FT6 Orange": { section: 30.66 }, "6c18 FT6 Orange": { section: 38.32 }, "CAT6 FT6 Orange": { section: 24.54 },
-    "4c22 FT6 Gris": { section: 10.07 }, "6c22 FT6 Gris": { section: 14.3 }, "8c22 FT6 Gris": { section: 17.53 },
-    "12c22 FT6 Gris": { section: 21.09 }, "2pr22(TW/SH) FT6 Gris": { section: 26.8 }, "4c18 FT6 Gris": { section: 17.16 },
-    "6c18 FT6 Gris": { section: 22.35 }, "8c18 FT6 Gris": { section: 28.70 }, "10c18 FT6 Gris": { section: 36.39 },
-    "2c14 FT6 Gris": { section: 23 }, "2c12 FT6 Gris": { section: 30.92 }
+    "1pr24 SH FT6 - 8320": { section: 9.93 }, "1pr24 SH FT6 - 8321": { section: 9.93 }, "1pr22 SH 108 Ohms FT6 - 8302": { section: 15.87 },
+    "1pr22 SH 120 Ohms FT6 - 8302A": { section: 13.30 }, "1tr22 SH 108 Ohms FT6 - 8304R": { section: 17.34 }, "1tr22 SH FT6 - 8304": { section: 14.99 },
+    "2pr22 TW/SH FT6": { section: 26.80 }, "4c22 FT6 - BAF66": { section: 11.55 }, "4c22 Thermocom FT6  - 8275": { section: 10.07 },
+    "4c22 SH Thermocom FT6 - 8305": { section: 10.95 }, "6c22 FT6 - BAF95": { section: 14.99 }, "8c22 FT6 - BAF97": { section: 17.53 },
+    "12c22 FT6 - XXXXX": { section: 21.09 }, "1pr20 FT6 - 8290": { section: 9.65 }, "1pr20 Echelon FT6 - 8293": { section: 7.79 },
+    "1pr20 SH FT6 - 8300": { section: 9.93 }, "1tr20 FT6 - 8291": { section: 10.80 }, "1pr18 FT6 - 8270": { section: 12.65 },
+    "1pr18 SH FT6 - 8280": { section: 12.97 }, "1tr18 FT6 - 8271": { section: 14.30 }, "1tr18 SH FT6 - 8281": { section: 15.70 },
+    "2pr18 SH FT6 - 8282": { section: 30.66 }, "4c18 FT6 - 8272": { section: 17.16 }, "4c18 FT6 - B7562": { section: 17.16 },
+    "4C18 SH FT6 - 8284": { section: 18.29 }, "6c18 FT6 - B7564": { section: 22.77 }, "8c18 FT6 - B7566": { section: 30.66 },
+    "10c18 FT6 - B7568": { section: 38.60 }, "12c18 SH FT6 - 8262": { section: 38.88 }, "1pr16 FT6 - 8260": { section: 15.70 },
+    "1pr16 SH FT6 - 8287": { section: 17.53 }, "1tr16 FT6 - 8261": { section: 19.47 }, "1pr14 FT6 - 8258": { section: 28.88 },
+    "2c14 FT6": { section: 23 }, "2c12 FT6": { section: 30.92 }, "CAT5e FT6": { section: 20.27 },
+    "CAT6 FT6": { section: 29.19 }, "CAT6a FT6": { section: 45.60 }
   }
 };
 
