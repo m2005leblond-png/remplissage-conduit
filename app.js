@@ -89,7 +89,15 @@ const cablesParType = {
     "16/8 SH - VITALink FAS_CIC_FA1608S": { section: 134.99 }, "14/2 SH - VITALink FAS_CIC_FA1402S": { section: 65.18 }, "14/3 SH - VITALink FAS_CIC_FA1403S": { section: 79.80 },
     "14/6 SH - VITALink FAS_CIC_FA1406S": { section: 134.99 }
   },
-  "CONTROLE": {
+    "CONTROLE FT4": {
+    "3c22(SH)FT6 Orange": { section: 17.53 }, "2c18 FT6 Orange": { section: 12.97 }, "3c18 FT6 Orange": { section: 15.69 },
+    "4c18 FT6 Orange": { section: 30.66 }, "6c18 FT6 Orange": { section: 38.32 }, "CAT6 FT6 Orange": { section: 24.54 },
+    "4c22 FT6 Gris": { section: 10.07 }, "6c22 FT6 Gris": { section: 14.3 }, "8c22 FT6 Gris": { section: 17.53 },
+    "12c22 FT6 Gris": { section: 21.09 }, "2pr22(TW/SH) FT6 Gris": { section: 26.8 }, "4c18 FT6 Gris": { section: 17.16 },
+    "6c18 FT6 Gris": { section: 22.35 }, "8c18 FT6 Gris": { section: 28.70 }, "10c18 FT6 Gris": { section: 36.39 },
+    "2c14 FT6 Gris": { section: 23 }, "2c12 FT6 Gris": { section: 30.92 }
+  },
+  "CONTROLE FT6": {
     "3c22(SH)FT6 Orange": { section: 17.53 }, "2c18 FT6 Orange": { section: 12.97 }, "3c18 FT6 Orange": { section: 15.69 },
     "4c18 FT6 Orange": { section: 30.66 }, "6c18 FT6 Orange": { section: 38.32 }, "CAT6 FT6 Orange": { section: 24.54 },
     "4c22 FT6 Gris": { section: 10.07 }, "6c22 FT6 Gris": { section: 14.3 }, "8c22 FT6 Gris": { section: 17.53 },
