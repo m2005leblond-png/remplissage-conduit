@@ -1,7 +1,7 @@
 // ==========================================
 // CONFIGURATION DU SERVICE WORKER (v1.2)
 // ==========================================
-const CACHE_NAME = "calculateur-conduit-v1.0"; // Nouveau nom, version 1.2 !
+const CACHE_NAME = "calculateur-conduit-v1.2"; // Nom mis à jour en v1.2 !
 
 const ASSETS = [
   "./",
@@ -20,9 +20,9 @@ self.addEventListener("install", event => {
     caches.open(CACHE_NAME)
       .then(cache => {
         console.log("Service Worker : Mise en cache des fichiers initiaux");
-        return cache.addAll(ASSETS); // Correction ici : on utilise bien la variable ASSETS
+        return cache.addAll(ASSETS);
       })
-      .then(() => self.skipWaiting()) // Force le SW à s'installer immédiatement sans attendre
+      .then(() => self.skipWaiting())
       .catch(err => console.error("Échec de la mise en cache initiale :", err))
   );
 });
@@ -37,11 +37,11 @@ self.addEventListener("activate", event => {
         keys.map(key => {
           if (key !== CACHE_NAME) {
             console.log("Service Worker : Suppression de l'ancien cache", key);
-            return caches.delete(key); // Supprime les vieux résidus (comme votre ancien v2)
+            return caches.delete(key);
           }
         })
       )
-    ).then(() => self.clients.claim()) // Prend le contrôle des pages ouvertes immédiatement
+    ).then(() => self.clients.claim())
   );
 });
 
@@ -51,7 +51,6 @@ self.addEventListener("activate", event => {
 self.addEventListener("fetch", event => {
   const url = new URL(event.request.url);
 
-  // Stratégie Réseau d'abord pour app.js et style.css (pour voir vos modifications rapidement)
   if (url.pathname.endsWith("app.js") || url.pathname.endsWith("style.css")) {
     event.respondWith(
       fetch(event.request)
@@ -62,12 +61,11 @@ self.addEventListener("fetch", event => {
           }
           return response;
         })
-        .catch(() => caches.match(event.request)) // Si pas de réseau, on prend la version en cache
+        .catch(() => caches.match(event.request))
     );
     return;
   }
 
-  // Stratégie Cache d'abord pour le reste (index.html, images, manifest)
   event.respondWith(
     caches.match(event.request).then(response => {
       return response || fetch(event.request);
