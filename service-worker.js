@@ -1,5 +1,5 @@
 // ==========================================
-// CONFIGURATION DU SERVICE WORKER (v1.1)
+// CONFIGURATION DU SERVICE WORKER (v1.2)
 // ==========================================
 const CACHE_NAME = "calculateur-conduit-v1.0"; // Nouveau nom, version 1.0 !
 
