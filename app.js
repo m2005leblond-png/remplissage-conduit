@@ -238,22 +238,26 @@ function calculer() {
     }
   });
 
-  const conduit = conduits.find(c => sectionTotale <= c.section * facteur);
+const conduit = conduits.find(c => sectionTotale <= c.section * factor);
 
   let texteResultat = "";
   if (!conduit) {
     texteResultat = "<span style='color:red; font-weight:bold;'>❌ OVER (Hors limites)</span>";
   } else {
-    // Calcul de la section totale autorisée pour le conduit trouvé selon le pourcentage
-    const pourcentageTexte = nbFils.options[nbFils.selectedIndex].text.split(" ")[0]; // Récupère "40", "53", etc.
+    // Nettoie le texte du menu déroulant pour extraire proprement le "%" (ex: "40 %" ou "53 %")
+    const texteComplet = nbFils.options[nbFils.selectedIndex].text;
+    const pourcentageTexte = texteComplet.split("(")[0].trim(); // Récupère tout ce qui est avant la parenthèse
+
     const sectionAutorisee = conduit.section * facteur;
 
     texteResultat = `
-      ✅ Section totale des câbles : <strong>${sectionTotale.toFixed(2)} mm²</strong><br>
+      ✅ Section totale : <strong>${sectionTotale.toFixed(2)} mm²</strong><br>
       ✅ Taille minimale du conduit : <strong>${conduit.nom}</strong><br>
-      ✅ Section totale autorisée pour ${pourcentageTexte}% du conduit ${conduit.nom} : <strong>${sectionAutorisee.toFixed(2)} mm²</strong>
+      ✅ Section totale autorisée pour ${pourcentageTexte} du conduit ${conduit.nom} : <strong>${sectionAutorisee.toFixed(2)} mm²</strong>
     `;
   }
+
+  resultat.innerHTML = texteResultat;
 
   resultat.innerHTML = texteResultat;
 
