@@ -250,27 +250,28 @@ function calculer() {
     texteResultat = `
       ✅ Section totale : <strong>${sectionTotale.toFixed(2)} mm²</strong><br>
       ✅ Taille minimale du conduit : <strong>${conduit.nom}</strong><br>
-      ✅ Section totale autorisée - ${pourcentageTexte} du conduit ${conduit.nom} : <strong>${sectionAutorisee.toFixed(2)} mm²</strong>
+      ✅ Section totale autorisée pour ${pourcentageTexte} du conduit ${conduit.nom} : <strong>${sectionAutorisee.toFixed(2)} mm²</strong>
     `;
   }
 
   resultat.innerHTML = texteResultat;
 
-if (pdfContent) {
-  pdfContent.innerHTML = `
-    <h2 style="font-size: 24px; font-weight: bold; margin-bottom: 20px; line-height: 1.2;">
-      Rapport<br>Remplissage de conduit
-    </h2>
-    <hr>
-    <p><strong>Type de conduit sélectionné :</strong> ${typeConduitSelect.value}</p>
-    <p><strong>% de remplissage ciblé :</strong> ${nbFils.options[nbFils.selectedIndex].text}</p>
-    <br>
-    <h3>Liste des câbles inclus :</h3>
-    <ul>${detailCablesHtml}</ul>
-    <hr>
-    <h3>Résultats du calcul :</h3>
-    <p>${texteResultat}</p>
-  `;
+  if (pdfContent) {
+    pdfContent.innerHTML = `
+      <h2 style="font-size: 24px; font-weight: bold; margin-bottom: 20px; line-height: 1.2;">
+        Rapport<br>Remplissage de conduit
+      </h2>
+      <hr>
+      <p><strong>Type de conduit sélectionné :</strong> ${typeConduitSelect.value}</p>
+      <p><strong>% de remplissage ciblé :</strong> ${nbFils.options[nbFils.selectedIndex].text}</p>
+      <br>
+      <h3>Liste des câbles inclus :</h3>
+      <ul>${detailCablesHtml}</ul>
+      <hr>
+      <h3>Résultats du calcul :</h3>
+      <p>${texteResultat}</p>
+    `;
+  }
 }
   }
 }
