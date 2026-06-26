@@ -238,7 +238,8 @@ function calculer() {
     }
   });
 
-const conduit = conduits.find(c => sectionTotale <= c.section * factor);
+  // CORRECTION ICI : "facteur" avec un "e" au lieu de "factor"
+  const conduit = conduits.find(c => sectionTotale <= c.section * facteur);
 
   let texteResultat = "";
   if (!conduit) {
@@ -256,6 +257,22 @@ const conduit = conduits.find(c => sectionTotale <= c.section * factor);
       ✅ Section totale autorisée pour ${pourcentageTexte} du conduit ${conduit.nom} : <strong>${sectionAutorisee.toFixed(2)} mm²</strong>
     `;
   }
+
+  resultat.innerHTML = texteResultat;
+
+  if (pdfContent) {
+    pdfContent.innerHTML = `
+      <p><strong>Type de conduit sélectionné :</strong> ${typeConduitSelect.value}</p>
+      <p><strong>% de remplissage ciblé :</strong> ${nbFils.options[nbFils.selectedIndex].text}</p>
+      <br>
+      <h3>Liste des câbles inclus :</h3>
+      <ul>${detailCablesHtml}</ul>
+      <hr>
+      <h3>Résultats du calcul :</h3>
+      <p>${texteResultat}</p>
+    `;
+  }
+}
 
   resultat.innerHTML = texteResultat;
 
