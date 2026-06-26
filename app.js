@@ -250,7 +250,7 @@ function calculer() {
     texteResultat = `
       ✅ Section totale : <strong>${sectionTotale.toFixed(2)} mm²</strong><br>
       ✅ Taille minimale du conduit : <strong>${conduit.nom}</strong><br>
-      ✅ Section totale autorisée pour ${pourcentageTexte} du conduit ${conduit.nom} : <strong>${sectionAutorisee.toFixed(2)} mm²</strong>
+      ✅ Section totale autorisée - ${pourcentageTexte} du conduit ${conduit.nom} : <strong>${sectionAutorisee.toFixed(2)} mm²</strong>
     `;
   }
 
