@@ -1,6 +1,6 @@
-const CACHE_NAME = "remplissage-conduit-v32"; // Version augmentée pour forcer la mise à jour
+const CACHE_NAME = "calculateur-conduit-v1.0"; // Nouveau nom, version 1.0 !
 
-const FILES_TO_CACHE = [
+const ASSETS = [
   "./",
   "./index.html",
   "./style.css",
