@@ -273,8 +273,6 @@ function calculer() {
     `;
   }
 }
-  }
-}
 
 document.addEventListener("DOMContentLoaded", () => {
   categorieCable.addEventListener("change", () => {
