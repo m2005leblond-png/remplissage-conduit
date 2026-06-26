@@ -1,5 +1,5 @@
 // ==========================================
-// 1. BASE DE DONNÉES INTEGRÉE
+// 1. BASE DE DONNÉES INTÉGRÉE
 // ==========================================
 const seuilsRemplissage = {
   1: 0.53, 2: 0.31, 3: 0.40, 4: 0.38, 5: 0.35, 6: 0.60, 7: 0.50
@@ -89,7 +89,7 @@ const cablesParType = {
     "16/8 SH - VITALink FAS_CIC_FA1608S": { section: 134.99 }, "14/2 SH - VITALink FAS_CIC_FA1402S": { section: 65.18 }, "14/3 SH - VITALink FAS_CIC_FA1403S": { section: 79.80 },
     "14/6 SH - VITALink FAS_CIC_FA1406S": { section: 134.99 }
   },
-    "CONTROLE FT4": {
+  "CONTROLE FT4": {
     "1pr24 SH FT4 - 8250": { section: 13.30 }, "2pr24 SH FT4 - 8251": { section: 25.88 }, "1pr22 FT4 - 8230": { section: 12.17 },
     "1pr22 Echelon FT4 - 8229": { section: 11.71 }, "1pr22 SH FT4 - 8240": { section: 10.22 }, "1pr22 SH 108 Ohms FT4 - 8247": { section: 14.99 },
     "1tr22 SH FT4 - 8241": { section: 11.40 }, "1tr22 SH 108 Ohms FT4 - 8248": { section: 20.47 }, "4c22 SH Thermocom FT4 - 8242": { section: 13.46 },
@@ -182,7 +182,6 @@ function ajouterCable() {
   typeCable.value = "";
   typeCable.classList.add("champ-placeholder");
   
-  // Cache la zone d'alerte rouge après l'ajout du câble
   if (alerteZoneSecurisee) {
     alerteZoneSecurisee.style.display = "none";
   }
@@ -238,17 +237,14 @@ function calculer() {
     }
   });
 
-  // CORRECTION ICI : "facteur" avec un "e" au lieu de "factor"
   const conduit = conduits.find(c => sectionTotale <= c.section * facteur);
 
   let texteResultat = "";
   if (!conduit) {
     texteResultat = "<span style='color:red; font-weight:bold;'>❌ OVER (Hors limites)</span>";
   } else {
-    // Nettoie le texte du menu déroulant pour extraire proprement le "%" (ex: "40 %" ou "53 %")
     const texteComplet = nbFils.options[nbFils.selectedIndex].text;
-    const pourcentageTexte = texteComplet.split("(")[0].trim(); // Récupère tout ce qui est avant la parenthèse
-
+    const pourcentageTexte = texteComplet.split("(")[0].trim();
     const sectionAutorisee = conduit.section * facteur;
 
     texteResultat = `
@@ -274,30 +270,9 @@ function calculer() {
   }
 }
 
-  resultat.innerHTML = texteResultat;
-
-  resultat.innerHTML = texteResultat;
-
-  if (pdfContent) {
-    pdfContent.innerHTML = `
-      <p><strong>Type de conduit sélectionné :</strong> ${typeConduitSelect.value}</p>
-      <p><strong>% de remplissage ciblé :</strong> ${nbFils.options[nbFils.selectedIndex].text}</p>
-      <br>
-      <h3>Liste des câbles inclus :</h3>
-      <ul>${detailCablesHtml}</ul>
-      <hr>
-      <h3>Résultats du calcul :</h3>
-      <p>${texteResultat}</p>
-    `;
-  }
-}
-
 document.addEventListener("DOMContentLoaded", () => {
-  
   categorieCable.addEventListener("change", () => {
     chargerCables();
-    
-    // ✅ GESTION DYNAMIQUE DE L'AFFICHAGE DU TEXTE ROUGE COMPLÉMENTAIRE
     if (alerteZoneSecurisee) {
       if (categorieCable.value === "FAS VITALINK") {
         alerteZoneSecurisee.style.display = "block";
