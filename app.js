@@ -256,17 +256,22 @@ function calculer() {
 
   resultat.innerHTML = texteResultat;
 
-  if (pdfContent) {
-    pdfContent.innerHTML = `
-      <p><strong>Type de conduit sélectionné :</strong> ${typeConduitSelect.value}</p>
-      <p><strong>% de remplissage ciblé :</strong> ${nbFils.options[nbFils.selectedIndex].text}</p>
-      <br>
-      <h3>Liste des câbles inclus :</h3>
-      <ul>${detailCablesHtml}</ul>
-      <hr>
-      <h3>Résultats du calcul :</h3>
-      <p>${texteResultat}</p>
-    `;
+if (pdfContent) {
+  pdfContent.innerHTML = `
+    <h2 style="font-size: 24px; font-weight: bold; margin-bottom: 20px; line-height: 1.2;">
+      Rapport<br>Remplissage de conduit
+    </h2>
+    <hr>
+    <p><strong>Type de conduit sélectionné :</strong> ${typeConduitSelect.value}</p>
+    <p><strong>% de remplissage ciblé :</strong> ${nbFils.options[nbFils.selectedIndex].text}</p>
+    <br>
+    <h3>Liste des câbles inclus :</h3>
+    <ul>${detailCablesHtml}</ul>
+    <hr>
+    <h3>Résultats du calcul :</h3>
+    <p>${texteResultat}</p>
+  `;
+}
   }
 }
 
