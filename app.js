@@ -256,12 +256,9 @@ function calculer() {
 
   resultat.innerHTML = texteResultat;
 
+  // On injecte le contenu sans répéter le titre h2 "Rapport Remplissage de conduit"
   if (pdfContent) {
     pdfContent.innerHTML = `
-      <h2 style="font-size: 24px; font-weight: bold; margin-bottom: 20px; line-height: 1.2;">
-        Rapport<br>Remplissage de conduit
-      </h2>
-      <hr>
       <p><strong>Type de conduit sélectionné :</strong> ${typeConduitSelect.value}</p>
       <p><strong>% de remplissage ciblé :</strong> ${nbFils.options[nbFils.selectedIndex].text}</p>
       <br>
