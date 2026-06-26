@@ -244,7 +244,15 @@ function calculer() {
   if (!conduit) {
     texteResultat = "<span style='color:red; font-weight:bold;'>❌ OVER (Hors limites)</span>";
   } else {
-    texteResultat = `✅ Section totale : <strong>${sectionTotale.toFixed(2)} mm²</strong><br>✅ Taille minimale du conduit : <strong>${conduit.nom}</strong>`;
+    // Calcul de la section totale autorisée pour le conduit trouvé selon le pourcentage
+    const pourcentageTexte = nbFils.options[nbFils.selectedIndex].text.split(" ")[0]; // Récupère "40", "53", etc.
+    const sectionAutorisee = conduit.section * facteur;
+
+    texteResultat = `
+      ✅ Section totale des câbles : <strong>${sectionTotale.toFixed(2)} mm²</strong><br>
+      ✅ Taille minimale du conduit : <strong>${conduit.nom}</strong><br>
+      ✅ Section totale autorisée pour ${pourcentageTexte}% du conduit ${conduit.nom} : <strong>${sectionAutorisee.toFixed(2)} mm²</strong>
+    `;
   }
 
   resultat.innerHTML = texteResultat;
