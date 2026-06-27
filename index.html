@@ -18,13 +18,13 @@
 
 <body>
 
-  <!-- En-tête avec bouton d'information aligné à droite -->
-  <div class="entete-pwa">
-    <h1>
+  <!-- En-tête avec bouton d'information aligné à droite du titre -->
+  <div class="entete-pwa" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+    <h1 style="margin: 0; font-size: 24px;">
       Calcul de remplissage de conduit 
       <span id="versionApp" style="font-size: 0.5em; opacity: 0.6; font-weight: normal; margin-left: 10px;"></span>
     </h1>
-    <button id="btnInfoPwa" title="Comment installer l'application">ⓘ</button>
+    <button id="btnInfoPwa" title="Comment installer l'application" style="background: none; border: 2px solid #1e88e5; color: #1e88e5; border-radius: 50%; width: 32px; height: 32px; font-weight: bold; font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; padding: 0; flex-shrink: 0; margin-left: 15px;">ⓘ</button>
   </div>
 
   <label for="typeConduit">Type de conduit</label>
@@ -93,41 +93,38 @@
     <div id="pdfContent"></div>
   </div>
 
-  <!-- FENÊTRE MODALE : GUIDE D'INSTALLATION PWA -->
-  <div id="modalPwa" class="modal-pwa">
-    <div class="modal-content-pwa">
-      <span class="close-pwa">&times;</span>
-      <h2>📱 Guide d'installation PWA</h2>
-      <p style="font-size: 0.9em; color: #666; margin-bottom: 20px;">Ajoutez cette application sur votre écran d'accueil pour pouvoir l'utiliser sans réseau directement sur les chantiers.</p>
+  <!-- FENÊTRE MODALE : GUIDE D'INSTALLATION TEXTUEL -->
+  <div id="modalPwa" class="modal-pwa" style="display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); overflow-y: auto;">
+    <div class="modal-content-pwa" style="background-color: #ffffff; margin: 15% auto; padding: 20px; border-radius: 8px; max-width: 500px; width: 90%; box-shadow: 0 4px 10px rgba(0,0,0,0.3); position: relative; font-family: sans-serif;">
+      <span class="close-pwa" style="position: absolute; right: 15px; top: 10px; font-size: 28px; font-weight: bold; cursor: pointer; color: #aaa;">&times;</span>
+      <h2 style="margin-top: 0; font-size: 20px; color: #333;">📱 Guide d'installation hors ligne</h2>
+      <p style="font-size: 0.9em; color: #666; margin-bottom: 20px; line-height: 1.4;">Ajoutez cette application sur l'écran d'accueil de votre appareil pour pouvoir l'utiliser directement sur les chantiers sans aucune connexion réseau.</p>
       
-      <div class="plateforme-section">
-        <h3>🍏 Apple iOS (iPhone / iPad)</h3>
-        <ol>
+      <div style="margin-bottom: 15px; border-bottom: 1px solid #eee; padding-bottom: 15px;">
+        <h3 style="margin: 0 0 8px 0; font-size: 16px; color: #1e88e5;">🍏 Apple iOS (iPhone / iPad)</h3>
+        <ol style="margin: 0; padding-left: 20px; line-height: 1.5; font-size: 0.95em;">
           <li>Ouvrez ce site dans le navigateur <strong>Safari</strong>.</li>
-          <li>Appuyez sur le bouton de partage en bas de l'écran <span class="extrait-visuel">⎋</span>.</li>
-          <li>Faites défiler le menu et sélectionnez <strong>Sur l'écran d'accueil</strong> <span class="extrait-visuel">⊞</span>.</li>
+          <li>Appuyez sur le bouton de partage en bas de l'écran (l'icône avec un carré et une flèche vers le haut).</li>
+          <li>Faites défiler les options et sélectionnez <strong>Sur l'écran d'accueil</strong>.</li>
           <li>Appuyez sur <strong>Ajouter</strong> en haut à droite.</li>
         </ol>
-        <img src="img/ios-safari.png" alt="Aperçu installation iOS Safari" class="img-aide-pwa">
       </div>
 
-      <div class="plateforme-section">
-        <h3>🤖 Android (Chrome)</h3>
-        <ol>
-          <li>Ouvrez ce site dans <strong>Google Chrome</strong>.</li>
-          <li>Appuyez sur les 3 petits points <span class="extrait-visuel">⋮</span> en haut à droite.</li>
+      <div style="margin-bottom: 15px; border-bottom: 1px solid #eee; padding-bottom: 15px;">
+        <h3 style="margin: 0 0 8px 0; font-size: 16px; color: #2e7d32;">🤖 Android (Chrome)</h3>
+        <ol style="margin: 0; padding-left: 20px; line-height: 1.5; font-size: 0.95em;">
+          <li>Ouvrez ce site dans l'application <strong>Google Chrome</strong>.</li>
+          <li>Appuyez sur les 3 petits points de menu en haut à droite.</li>
           <li>Sélectionnez l'option <strong>Installer l'application</strong> ou <strong>Ajouter à l'écran d'accueil</strong>.</li>
         </ol>
-        <img src="img/android-chrome.png" alt="Aperçu installation Android Chrome" class="img-aide-pwa">
       </div>
 
-      <div class="plateforme-section">
-        <h3>💻 Ordinateur (Chrome / Edge)</h3>
-        <ol>
-          <li>Dans la barre d'adresse en haut, cliquez sur l'icône d'installation <span class="extrait-visuel">⨁</span> située à droite.</li>
-          <li>Cliquez sur le bouton <strong>Installer</strong>.</li>
+      <div style="margin-bottom: 5px;">
+        <h3 style="margin: 0 0 8px 0; font-size: 16px; color: #e65100;">💻 Ordinateur (Chrome / Edge)</h3>
+        <ol style="margin: 0; padding-left: 20px; line-height: 1.5; font-size: 0.95em;">
+          <li>Cliquez sur l'icône d'installation (un petit écran avec une flèche) située tout à droite dans la barre d'adresse.</li>
+          <li>Confirmez en cliquant sur le bouton <strong>Installer</strong>.</li>
         </ol>
-        <img src="img/pc-chrome.png" alt="Aperçu installation Ordinateur" class="img-aide-pwa">
       </div>
     </div>
   </div>
