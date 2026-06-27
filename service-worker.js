@@ -1,7 +1,7 @@
 // ==========================================
 // CONFIGURATION DU SERVICE WORKER (v2.6)
 // ==========================================
-const CACHE_NAME = "calculateur-conduit-v2.5";
+const CACHE_NAME = "calculateur-conduit-v2.6";
 
 const ASSETS = [
   "./",
