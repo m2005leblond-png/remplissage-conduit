@@ -239,7 +239,7 @@ function calculer() {
     if (cablesParType[c.categorie] && cablesParType[c.categorie][c.type]) {
       const secUnitaire = cablesParType[c.categorie][c.type].section;
       sectionTotale += secUnitaire * c.qte;
-      quantiteTotaleCables += parseInt(c.qte, 10);
+      quantiteTotaleCables += parseInt(c.qte, 10) || 0;
       detailCablesHtml += `<li>${c.qte} × ${c.type} (${(secUnitaire * c.qte).toFixed(2)} mm²)</li>`;
       
       if (c.categorie !== "RW" && c.categorie !== "RWU") {
@@ -251,29 +251,30 @@ function calculer() {
   // 2. Récupérer la valeur décimale exacte (ex: 0.53, 0.40, 0.31...)
   const pourcentageSelectionne = seuilsRemplissage[nbFils.value];
 
-  // 3. Logique des avertissements corrigée
+  // 3. Logique des avertissements (S'applique UNIQUEMENT s'il n'y a que du RW et/ou RWU)
   let avertissementHtml = "";
   
-  if (quantiteTotaleCables === 1) {
-    if (pourcentageSelectionne === 0.53) {
-      avertissementHtml = "";
-    } else if (pourcentageSelectionne > 0.53) {
-      avertissementHtml = `<p style="color: #d32f2f; font-weight: bold; margin-bottom: 15px;">⚠️ Attention : Pour 1 câble, le % de remplissage doit être égal ou inférieur à 53%.</p>`;
-    } else {
-      avertissementHtml = `<p style="color: #2e7d32; font-weight: bold; margin-bottom: 15px;">💡 Astuce : Pour 1 câble, le % de remplissage peut être jusqu'à 53%.</p>`;
-    }
-  } else if (quantiteTotaleCables === 2) {
-    if (pourcentageSelectionne > 0.31) {
-      avertissementHtml = `<p style="color: #d32f2f; font-weight: bold; margin-bottom: 15px;">⚠️ Attention : Pour 2 câbles, le % de remplissage ne doit pas être supérieur à 31%.</p>`;
-    } else {
-      avertissementHtml = "";
-    }
-  } else if (quantiteTotaleCables >= 3 && uniquementRwRwu) {
-    // Si on a 3 câbles et + de type RW/RWU, et que le pourcentage dépasse 40% (0.40)
-    if (pourcentageSelectionne > 0.40) {
-      avertissementHtml = `<p style="color: #d32f2f; font-weight: bold; margin-bottom: 15px;">⚠️ Attention : Pour le RW et RWU, le % de remplissage ne doit pas être supérieur à 40%.</p>`;
-    } else {
-      avertissementHtml = "";
+  if (uniquementRwRwu) {
+    if (quantiteTotaleCables === 1) {
+      if (pourcentageSelectionne === 0.53) {
+        avertissementHtml = "";
+      } else if (pourcentageSelectionne > 0.53) {
+        avertissementHtml = `<p style="color: #d32f2f; font-weight: bold; margin-bottom: 15px;">⚠️ Attention : Pour 1 câble, le % de remplissage doit être égal ou inférieur à 53%.</p>`;
+      } else {
+        avertissementHtml = `<p style="color: #2e7d32; font-weight: bold; margin-bottom: 15px;">💡 Astuce : Pour 1 câble, le % de remplissage peut être jusqu'à 53%.</p>`;
+      }
+    } else if (quantiteTotaleCables === 2) {
+      if (pourcentageSelectionne > 0.31) {
+        avertissementHtml = `<p style="color: #d32f2f; font-weight: bold; margin-bottom: 15px;">⚠️ Attention : Pour 2 câbles, le % de remplissage ne doit pas être supérieur à 31%.</p>`;
+      } else {
+        avertissementHtml = "";
+      }
+    } else if (quantiteTotaleCables >= 3) {
+      if (pourcentageSelectionne > 0.40) {
+        avertissementHtml = `<p style="color: #d32f2f; font-weight: bold; margin-bottom: 15px;">⚠️ Attention : Pour le RW et RWU, le % de remplissage ne doit pas être supérieur à 40%.</p>`;
+      } else {
+        avertissementHtml = "";
+      }
     }
   }
 
