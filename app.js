@@ -229,8 +229,9 @@ function calculer() {
   let sectionTotale = 0;
   let detailCablesHtml = "";
   
-  // 1. Calculer la quantité totale de câbles (la somme des qtés)
+  // 1. Calculer la quantité totale de câbles et analyser les types présents
   let quantiteTotaleCables = 0;
+  let uniquementRwRwu = true; // Reste vrai tant qu'on ne trouve pas une autre catégorie
 
   liste.forEach(c => {
     if (cablesParType[c.categorie] && cablesParType[c.categorie][c.type]) {
@@ -238,11 +239,15 @@ function calculer() {
       sectionTotale += secUnitaire * c.qte;
       quantiteTotaleCables += parseInt(c.qte, 10);
       detailCablesHtml += `<li>${c.qte} × ${c.type} (${(secUnitaire * c.qte).toFixed(2)} mm²)</li>`;
+      
+      // Si la catégorie du câble n'est ni RW ni RWU, on bascule à faux
+      if (c.categorie !== "RW" && c.categorie !== "RWU") {
+        uniquementRwRwu = false;
+      }
     }
   });
 
   // 2. Récupérer la valeur sélectionnée dans le menu déroulant
-  // nbFils.value contient l'identifiant ("1" pour 53%, "2" pour 31%, "3" pour 40%...)
   const optionSelectionnee = nbFils.value; 
 
   // 3. Logique des avertissements dynamiques
@@ -250,21 +255,23 @@ function calculer() {
   
   if (quantiteTotaleCables === 1) {
     if (optionSelectionnee === "1") {
-      // Si l'utilisateur choisit le bon pourcentage (53%), aucun avertissement ne s'affiche
       avertissementHtml = "";
     } else if (optionSelectionnee === "6") {
-      // Si la sélection dépasse 53% (Option 6 = 60%) -> Alerte en ROUGE
       avertissementHtml = `<p style="color: #d32f2f; font-weight: bold; margin-bottom: 15px;">⚠️ Attention : Pour 1 câble, le % de remplissage doit être égal ou inférieur à 53%.</p>`;
     } else {
-      // Pour toutes les autres options en dessous de 53% (31%, 40%, 38%, 35%, 50%) -> Astuce en VERT
       avertissementHtml = `<p style="color: #2e7d32; font-weight: bold; margin-bottom: 15px;">💡 Astuce : Pour 1 câble, le % de remplissage peut être jusqu'à 53%.</p>`;
     }
   } else if (quantiteTotaleCables === 2) {
     if (optionSelectionnee !== "2") {
-      // Si la sélection pour 2 câbles est différente de 31% (donc supérieure) -> Alerte en ROUGE
       avertissementHtml = `<p style="color: #d32f2f; font-weight: bold; margin-bottom: 15px;">⚠️ Attention : Pour 2 câbles, le % de remplissage ne doit pas être supérieur à 31%.</p>`;
     } else {
-      // Si l'utilisateur choisit exactement 31% (Option 2), l'avertissement s'efface
+      avertissementHtml = "";
+    }
+  } else if (quantiteTotaleCables >= 3 && uniquementRwRwu) {
+    // Règle 3 câbles et + : Option 6 = 60%, Option 7 = 50%
+    if (optionSelectionnee === "6" || optionSelectionnee === "7") {
+      avertissementHtml = `<p style="color: #d32f2f; font-weight: bold; margin-bottom: 15px;">⚠️ Attention : Pour le RW et RWU, le % de remplissage ne doit pas être supérieur à 40%.</p>`;
+    } else {
       avertissementHtml = "";
     }
   }
