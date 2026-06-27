@@ -228,14 +228,26 @@ function calculer() {
 
   let sectionTotale = 0;
   let detailCablesHtml = "";
+  
+  // 1. Calculer la quantité totale de câbles (la somme des qtés)
+  let quantiteTotaleCables = 0;
 
   liste.forEach(c => {
     if (cablesParType[c.categorie] && cablesParType[c.categorie][c.type]) {
       const secUnitaire = cablesParType[c.categorie][c.type].section;
       sectionTotale += secUnitaire * c.qte;
+      quantiteTotaleCables += parseInt(c.qte, 10); // Somme des quantités
       detailCablesHtml += `<li>${c.qte} × ${c.type} (${(secUnitaire * c.qte).toFixed(2)} mm²)</li>`;
     }
   });
+
+  // 2. Générer le message d'avertissement en rouge si nécessaire
+  let avertissementHtml = "";
+  if (quantiteTotaleCables === 1) {
+    avertissementHtml = `<p style="color: #d32f2f; font-weight: bold; margin-bottom: 15px;">⚠️ Attention : Pour 1 câble, le % de remplissage peut être de 53%.</p>`;
+  } else if (quantiteTotaleCables === 2) {
+    avertissementHtml = `<p style="color: #d32f2f; font-weight: bold; margin-bottom: 15px;">⚠️ Attention : Pour 2 câbles, le % de remplissage doit être de 31%.</p>`;
+  }
 
   const conduit = conduits.find(c => sectionTotale <= c.section * facteur);
 
@@ -250,15 +262,17 @@ function calculer() {
     texteResultat = `
       ✅ Section totale : <strong>${sectionTotale.toFixed(2)} mm²</strong><br>
       ✅ Taille minimale du conduit : <strong>${conduit.nom}</strong><br>
-      ✅ Section totale autorisée- ${pourcentageTexte} du conduit ${conduit.nom} : <strong>${sectionAutorisee.toFixed(2)} mm²</strong>
+      ✅ Section totale autorisée pour ${pourcentageTexte} du conduit ${conduit.nom} : <strong>${sectionAutorisee.toFixed(2)} mm²</strong>
     `;
   }
 
-  resultat.innerHTML = texteResultat;
+  // 3. Inclure l'avertissement dans l'affichage de l'application (en haut des résultats)
+  resultat.innerHTML = avertissementHtml + texteResultat;
 
-  // On injecte le contenu sans répéter le titre h2 "Rapport Remplissage de conduit"
+  // 4. Inclure également l'avertissement dans le bloc exporté en PDF
   if (pdfContent) {
     pdfContent.innerHTML = `
+      ${avertissementHtml}
       <p><strong>Type de conduit sélectionné :</strong> ${typeConduitSelect.value}</p>
       <p><strong>% de remplissage ciblé :</strong> ${nbFils.options[nbFils.selectedIndex].text}</p>
       <br>
