@@ -1,4 +1,4 @@
-const VERSION_APPLICATION = "v2.4";
+const VERSION_APPLICATION = "v2.5";
 
 document.addEventListener("DOMContentLoaded", () => {
   const elementVersion = document.getElementById("versionApp");
@@ -298,8 +298,8 @@ function calculer() {
     const sectionAutorisee = conduit.section * facteur;
 
     texteResultat = `
-      ✅ Section totale : <strong>${sectionTotale.toFixed(2)} mm²</strong><br>
-      ✅ Taille minimale du conduit : <strong>${conduit.nom}</strong><br>
+      ✅ Section totale des câbles : <strong>${sectionTotale.toFixed(2)} mm²</strong><br>
+      ✅ Diamètre minimal du conduit : <strong>${conduit.nom}</strong><br>
       ✅ Section autorisée pour ${pourcentageTexte} du conduit ${conduit.nom} : <strong>${sectionAutorisee.toFixed(2)} mm²</strong>
     `;
   }
