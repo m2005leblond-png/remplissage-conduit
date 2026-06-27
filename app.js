@@ -241,24 +241,31 @@ function calculer() {
     }
   });
 
-  // 2. Récupérer la valeur numérique du pourcentage sélectionné (ex: 0.40, 0.53, 0.60...)
-  const pourcentageSelectionne = seuilsRemplissage[nbFils.value];
+  // 2. Récupérer la valeur sélectionnée dans le menu déroulant
+  // nbFils.value contient l'identifiant ("1" pour 53%, "2" pour 31%, "3" pour 40%...)
+  const optionSelectionnee = nbFils.value; 
 
   // 3. Logique des avertissements dynamiques
   let avertissementHtml = "";
   
   if (quantiteTotaleCables === 1) {
-    if (pourcentageSelectionne < 0.53) {
-      // Si la sélection est inférieure à 53% (ex: 31%, 40%...) -> Astuce en VERT
-      avertissementHtml = `<p style="color: #2e7d32; font-weight: bold; margin-bottom: 15px;">💡 Astuce : Pour 1 câble, le % de remplissage peut être jusqu'à 53%.</p>`;
-    } else if (pourcentageSelectionne > 0.53) {
-      // Si la sélection dépasse 53% (ex: 60%) -> Alerte en ROUGE
+    if (optionSelectionnee === "1") {
+      // Si l'utilisateur choisit le bon pourcentage (53%), aucun avertissement ne s'affiche
+      avertissementHtml = "";
+    } else if (optionSelectionnee === "6") {
+      // Si la sélection dépasse 53% (Option 6 = 60%) -> Alerte en ROUGE
       avertissementHtml = `<p style="color: #d32f2f; font-weight: bold; margin-bottom: 15px;">⚠️ Attention : Pour 1 câble, le % de remplissage doit être égal ou inférieur à 53%.</p>`;
+    } else {
+      // Pour toutes les autres options en dessous de 53% (31%, 40%, 38%, 35%, 50%) -> Astuce en VERT
+      avertissementHtml = `<p style="color: #2e7d32; font-weight: bold; margin-bottom: 15px;">💡 Astuce : Pour 1 câble, le % de remplissage peut être jusqu'à 53%.</p>`;
     }
   } else if (quantiteTotaleCables === 2) {
-    if (pourcentageSelectionne > 0.31) {
-      // Si la sélection pour 2 câbles dépasse 31% -> Alerte en ROUGE
+    if (optionSelectionnee !== "2") {
+      // Si la sélection pour 2 câbles est différente de 31% (donc supérieure) -> Alerte en ROUGE
       avertissementHtml = `<p style="color: #d32f2f; font-weight: bold; margin-bottom: 15px;">⚠️ Attention : Pour 2 câbles, le % de remplissage ne doit pas être supérieur à 31%.</p>`;
+    } else {
+      // Si l'utilisateur choisit exactement 31% (Option 2), l'avertissement s'efface
+      avertissementHtml = "";
     }
   }
 
