@@ -236,17 +236,30 @@ function calculer() {
     if (cablesParType[c.categorie] && cablesParType[c.categorie][c.type]) {
       const secUnitaire = cablesParType[c.categorie][c.type].section;
       sectionTotale += secUnitaire * c.qte;
-      quantiteTotaleCables += parseInt(c.qte, 10); // Somme des quantités
+      quantiteTotaleCables += parseInt(c.qte, 10);
       detailCablesHtml += `<li>${c.qte} × ${c.type} (${(secUnitaire * c.qte).toFixed(2)} mm²)</li>`;
     }
   });
 
-  // 2. Générer le message d'avertissement en rouge si nécessaire
+  // 2. Récupérer la valeur numérique du pourcentage sélectionné (ex: 0.40, 0.53, 0.60...)
+  const pourcentageSelectionne = seuilsRemplissage[nbFils.value];
+
+  // 3. Logique des avertissements dynamiques
   let avertissementHtml = "";
+  
   if (quantiteTotaleCables === 1) {
-    avertissementHtml = `<p style="color: #d32f2f; font-weight: bold; margin-bottom: 15px;">⚠️ Attention : Pour 1 câble, le % de remplissage peut être de 53%.</p>`;
+    if (pourcentageSelectionne < 0.53) {
+      // Si la sélection est inférieure à 53% (ex: 31%, 40%...) -> Astuce en VERT
+      avertissementHtml = `<p style="color: #2e7d32; font-weight: bold; margin-bottom: 15px;">💡 Astuce : Pour 1 câble, le % de remplissage peut être jusqu'à 53%.</p>`;
+    } else if (pourcentageSelectionne > 0.53) {
+      // Si la sélection dépasse 53% (ex: 60%) -> Alerte en ROUGE
+      avertissementHtml = `<p style="color: #d32f2f; font-weight: bold; margin-bottom: 15px;">⚠️ Attention : Pour 1 câble, le % de remplissage doit être égal ou inférieur à 53%.</p>`;
+    }
   } else if (quantiteTotaleCables === 2) {
-    avertissementHtml = `<p style="color: #d32f2f; font-weight: bold; margin-bottom: 15px;">⚠️ Attention : Pour 2 câbles, le % de remplissage doit être de 31%.</p>`;
+    if (pourcentageSelectionne > 0.31) {
+      // Si la sélection pour 2 câbles dépasse 31% -> Alerte en ROUGE
+      avertissementHtml = `<p style="color: #d32f2f; font-weight: bold; margin-bottom: 15px;">⚠️ Attention : Pour 2 câbles, le % de remplissage ne doit pas être supérieur à 31%.</p>`;
+    }
   }
 
   const conduit = conduits.find(c => sectionTotale <= c.section * facteur);
@@ -266,10 +279,9 @@ function calculer() {
     `;
   }
 
-  // 3. Inclure l'avertissement dans l'affichage de l'application (en haut des résultats)
+  // 4. Application des textes à l'écran et dans le PDF
   resultat.innerHTML = avertissementHtml + texteResultat;
 
-  // 4. Inclure également l'avertissement dans le bloc exporté en PDF
   if (pdfContent) {
     pdfContent.innerHTML = `
       ${avertissementHtml}
