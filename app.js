@@ -1,4 +1,4 @@
-const VERSION_APPLICATION = "v2.8";
+const VERSION_APPLICATION = "v2.9";
 
 document.addEventListener("DOMContentLoaded", () => {
   const elementVersion = document.getElementById("versionApp");
@@ -370,7 +370,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (modalPwa && btnInfoPwa && closePwa) {
     btnInfoPwa.addEventListener("click", () => {
       modalPwa.style.display = "block";
-      document.body.style.overflow = "hidden"; // Bloque le défilement de fond
+      document.body.style.overflow = "hidden";
     });
 
     closePwa.addEventListener("click", () => {
@@ -378,7 +378,6 @@ document.addEventListener("DOMContentLoaded", () => {
       document.body.style.overflow = "auto";
     });
 
-    // Fermeture en cliquant n'importe où en dehors du cadre blanc
     window.addEventListener("click", (event) => {
       if (event.target === modalPwa) {
         modalPwa.style.display = "none";
