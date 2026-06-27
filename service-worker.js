@@ -1,7 +1,7 @@
 // ==========================================
-// CONFIGURATION DU SERVICE WORKER (v2.8)
+// CONFIGURATION DU SERVICE WORKER (v2.9)
 // ==========================================
-const CACHE_NAME = "calculateur-conduit-v2.8"; // Nom du cache
+const CACHE_NAME = "calculateur-conduit-v2.9";
 
 const ASSETS = [
   "./",
@@ -12,9 +12,6 @@ const ASSETS = [
   "./icon-192.png"
 ];
 
-// ==========================================
-// 1. INSTALLATION : Mise en cache des fichiers
-// ==========================================
 self.addEventListener("install", event => {
   event.waitUntil(
     caches.open(CACHE_NAME)
@@ -27,9 +24,6 @@ self.addEventListener("install", event => {
   );
 });
 
-// ==========================================
-// 2. ACTIVATION : Nettoyage automatique
-// ==========================================
 self.addEventListener("activate", event => {
   event.waitUntil(
     caches.keys().then(keys =>
@@ -45,9 +39,6 @@ self.addEventListener("activate", event => {
   );
 });
 
-// ==========================================
-// 3. INTERCEPTION DES REQUÊTES (FETCH)
-// ==========================================
 self.addEventListener("fetch", event => {
   const url = new URL(event.request.url);
 
