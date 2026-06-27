@@ -231,7 +231,7 @@ function calculer() {
   
   // 1. Calculer la quantité totale de câbles et analyser les types présents
   let quantiteTotaleCables = 0;
-  let uniquementRwRwu = true; // Reste vrai tant qu'on ne trouve pas une autre catégorie
+  let uniquementRwRwu = true; 
 
   liste.forEach(c => {
     if (cablesParType[c.categorie] && cablesParType[c.categorie][c.type]) {
@@ -240,36 +240,35 @@ function calculer() {
       quantiteTotaleCables += parseInt(c.qte, 10);
       detailCablesHtml += `<li>${c.qte} × ${c.type} (${(secUnitaire * c.qte).toFixed(2)} mm²)</li>`;
       
-      // Si la catégorie du câble n'est ni RW ni RWU, on bascule à faux
       if (c.categorie !== "RW" && c.categorie !== "RWU") {
         uniquementRwRwu = false;
       }
     }
   });
 
-  // 2. Récupérer la valeur sélectionnée dans le menu déroulant
-  const optionSelectionnee = nbFils.value; 
+  // 2. Récupérer la valeur décimale exacte (ex: 0.53, 0.40, 0.31...)
+  const pourcentageSelectionne = seuilsRemplissage[nbFils.value];
 
-  // 3. Logique des avertissements dynamiques
+  // 3. Logique des avertissements corrigée
   let avertissementHtml = "";
   
   if (quantiteTotaleCables === 1) {
-    if (optionSelectionnee === "1") {
+    if (pourcentageSelectionne === 0.53) {
       avertissementHtml = "";
-    } else if (optionSelectionnee === "6") {
+    } else if (pourcentageSelectionne > 0.53) {
       avertissementHtml = `<p style="color: #d32f2f; font-weight: bold; margin-bottom: 15px;">⚠️ Attention : Pour 1 câble, le % de remplissage doit être égal ou inférieur à 53%.</p>`;
     } else {
       avertissementHtml = `<p style="color: #2e7d32; font-weight: bold; margin-bottom: 15px;">💡 Astuce : Pour 1 câble, le % de remplissage peut être jusqu'à 53%.</p>`;
     }
   } else if (quantiteTotaleCables === 2) {
-    if (optionSelectionnee !== "2") {
+    if (pourcentageSelectionne > 0.31) {
       avertissementHtml = `<p style="color: #d32f2f; font-weight: bold; margin-bottom: 15px;">⚠️ Attention : Pour 2 câbles, le % de remplissage ne doit pas être supérieur à 31%.</p>`;
     } else {
       avertissementHtml = "";
     }
   } else if (quantiteTotaleCables >= 3 && uniquementRwRwu) {
-    // Règle 3 câbles et + : Option 6 = 60%, Option 7 = 50%
-    if (optionSelectionnee === "6" || optionSelectionnee === "7") {
+    // Si on a 3 câbles et + de type RW/RWU, et que le pourcentage dépasse 40% (0.40)
+    if (pourcentageSelectionne > 0.40) {
       avertissementHtml = `<p style="color: #d32f2f; font-weight: bold; margin-bottom: 15px;">⚠️ Attention : Pour le RW et RWU, le % de remplissage ne doit pas être supérieur à 40%.</p>`;
     } else {
       avertissementHtml = "";
@@ -293,7 +292,7 @@ function calculer() {
     `;
   }
 
-  // 4. Application des textes à l'écran et dans le PDF
+  // 4. Application à l'écran et au rapport PDF
   resultat.innerHTML = avertissementHtml + texteResultat;
 
   if (pdfContent) {
