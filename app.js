@@ -1,3 +1,12 @@
+const VERSION_APPLICATION = "v2.3";
+
+document.addEventListener("DOMContentLoaded", () => {
+  const elementVersion = document.getElementById("versionApp");
+  if (elementVersion) {
+    elementVersion.textContent = VERSION_APPLICATION;
+  }
+});
+
 // ==========================================
 // 1. BASE DE DONNÉES INTÉGRÉE
 // ==========================================
