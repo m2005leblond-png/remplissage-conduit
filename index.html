@@ -18,12 +18,18 @@
 
 <body>
 
-  <!-- En-tête avec bouton d'information aligné à droite du titre -->
+  <!-- En-tête avec l'icône à gauche du titre et le bouton info à droite -->
   <div class="entete-pwa" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-    <h1 style="margin: 0; font-size: 24px;">
-      Calcul de remplissage de conduit 
-      <span id="versionApp" style="font-size: 0.5em; opacity: 0.6; font-weight: normal; margin-left: 10px;"></span>
-    </h1>
+    <div style="display: flex; align-items: center; gap: 12px;">
+      <!-- Logo/Icône textuelle simplifiée remplaçant l'image (Conforme PWA) -->
+      <div style="width: 36px; height: 36px; background-color: #1e88e5; color: #ffffff; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); flex-shrink: 0;">⚡</div>
+      
+      <h1 style="margin: 0; font-size: 24px; display: flex; align-items: baseline;">
+        Calcul de remplissage de conduit 
+        <span id="versionApp" style="font-size: 0.5em; opacity: 0.6; font-weight: normal; margin-left: 10px;"></span>
+      </h1>
+    </div>
+    
     <button id="btnInfoPwa" title="Comment installer l'application" style="background: none; border: 2px solid #1e88e5; color: #1e88e5; border-radius: 50%; width: 32px; height: 32px; font-weight: bold; font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; padding: 0; flex-shrink: 0; margin-left: 15px;">ⓘ</button>
   </div>
 
