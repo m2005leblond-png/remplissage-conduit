@@ -1,4 +1,4 @@
-const VERSION_APPLICATION = "v2.9";
+const VERSION_APPLICATION = "v3.0";
 
 document.addEventListener("DOMContentLoaded", () => {
   const elementVersion = document.getElementById("versionApp");
