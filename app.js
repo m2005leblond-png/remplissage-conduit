@@ -149,7 +149,9 @@ function chargerCables() {
   Object.keys(cables).forEach(nom => {
     const opt = document.createElement("option");
     opt.value = nom;
-    opt.textContent = nom;
+    // On ajoute la section en mm² directement au bout du nom dans l'option de la liste déroulante
+    const secUnitaire = cables[nom].section;
+    opt.textContent = `${nom} (${secUnitaire.toFixed(2)} mm²)`;
     typeCable.appendChild(opt);
   });
 
