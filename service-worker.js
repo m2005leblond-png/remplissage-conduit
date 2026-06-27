@@ -1,7 +1,7 @@
 // ==========================================
-// CONFIGURATION DU SERVICE WORKER (v2.7)
+// CONFIGURATION DU SERVICE WORKER (v2.8)
 // ==========================================
-const CACHE_NAME = "calculateur-conduit-v2.5"; // Nom mis à jour en v2.7 !
+const CACHE_NAME = "calculateur-conduit-v2.8"; // Nom du cache
 
 const ASSETS = [
   "./",
@@ -9,10 +9,7 @@ const ASSETS = [
   "./style.css",
   "./app.js",
   "./manifest.json",
-  "./icon-192.png",
-  "./img/ios-safari.png",
-  "./img/android-chrome.png",
-  "./img/pc-chrome.png"
+  "./icon-192.png"
 ];
 
 // ==========================================
@@ -22,7 +19,7 @@ self.addEventListener("install", event => {
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then(cache => {
-        console.log("Service Worker : Mise en cache des fichiers initiaux (incluant les images d'aide)");
+        console.log("Service Worker : Mise en cache des fichiers initiaux");
         return cache.addAll(ASSETS);
       })
       .then(() => self.skipWaiting())
