@@ -5,10 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Remplissage de conduit</title>
 
-  <!-- Icônes de l'application -->
   <link rel="icon" type="image/png" href="icon-192.png">
-  <link rel="icon" type="image/png" sizes="512x512" href="icon-512.png">
-  <link rel="apple-touch-icon" href="icon-192.png">
 
   <link rel="stylesheet" href="style.css">
   <link rel="manifest" href="manifest.json">
@@ -18,12 +15,17 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
 </head>
+
 <body>
 
-  <h1>
-    Calcul de remplissage de conduit 
-    <span id="versionApp" style="font-size: 0.5em; opacity: 0.6; font-weight: normal; margin-left: 10px;"></span>
-  </h1>
+  <!-- En-tête avec bouton d'information aligné à droite -->
+  <div class="entete-pwa">
+    <h1>
+      Calcul de remplissage de conduit 
+      <span id="versionApp" style="font-size: 0.5em; opacity: 0.6; font-weight: normal; margin-left: 10px;"></span>
+    </h1>
+    <button id="btnInfoPwa" title="Comment installer l'application">ⓘ</button>
+  </div>
 
   <label for="typeConduit">Type de conduit</label>
   <select id="typeConduit">
@@ -57,7 +59,7 @@
     <option value="CONTROLE FT6">CONTRÔLE FT6</option>
   </select>
   
-  <div id="alerteZoneSecurisee" class="zone-securisee-alerte" style="display: none;">
+  <div id="alerteZoneSecurisee" class="zone-securisee-alerte">
     (SEULEMENT POUR LES ZONES SÉCURISÉES)
   </div>
 
@@ -84,11 +86,50 @@
   <div id="resultat">Ajoute des câbles pour voir les résultats.</div>
   <button id="btnPdf">Exporter en PDF</button>
 
-  <!-- Zone de rapport pour l'impression -->
+  <!-- Zone lue par votre fichier CSS pour l'impression -->
   <div id="pdfHeader" style="display:none;">
     <h1 style="font-size: 28px; line-height: 1.3; margin-bottom: 15px;">Rapport<br>Remplissage de conduit</h1>
     <hr>
     <div id="pdfContent"></div>
+  </div>
+
+  <!-- FENÊTRE MODALE : GUIDE D'INSTALLATION PWA -->
+  <div id="modalPwa" class="modal-pwa">
+    <div class="modal-content-pwa">
+      <span class="close-pwa">&times;</span>
+      <h2>📱 Guide d'installation PWA</h2>
+      <p style="font-size: 0.9em; color: #666; margin-bottom: 20px;">Ajoutez cette application sur votre écran d'accueil pour pouvoir l'utiliser sans réseau directement sur les chantiers.</p>
+      
+      <div class="plateforme-section">
+        <h3>🍏 Apple iOS (iPhone / iPad)</h3>
+        <ol>
+          <li>Ouvrez ce site dans le navigateur <strong>Safari</strong>.</li>
+          <li>Appuyez sur le bouton de partage en bas de l'écran <span class="extrait-visuel">⎋</span>.</li>
+          <li>Faites défiler le menu et sélectionnez <strong>Sur l'écran d'accueil</strong> <span class="extrait-visuel">⊞</span>.</li>
+          <li>Appuyez sur <strong>Ajouter</strong> en haut à droite.</li>
+        </ol>
+        <img src="img/ios-safari.png" alt="Aperçu installation iOS Safari" class="img-aide-pwa">
+      </div>
+
+      <div class="plateforme-section">
+        <h3>🤖 Android (Chrome)</h3>
+        <ol>
+          <li>Ouvrez ce site dans <strong>Google Chrome</strong>.</li>
+          <li>Appuyez sur les 3 petits points <span class="extrait-visuel">⋮</span> en haut à droite.</li>
+          <li>Sélectionnez l'option <strong>Installer l'application</strong> ou <strong>Ajouter à l'écran d'accueil</strong>.</li>
+        </ol>
+        <img src="img/android-chrome.png" alt="Aperçu installation Android Chrome" class="img-aide-pwa">
+      </div>
+
+      <div class="plateforme-section">
+        <h3>💻 Ordinateur (Chrome / Edge)</h3>
+        <ol>
+          <li>Dans la barre d'adresse en haut, cliquez sur l'icône d'installation <span class="extrait-visuel">⨁</span> située à droite.</li>
+          <li>Cliquez sur le bouton <strong>Installer</strong>.</li>
+        </ol>
+        <img src="img/pc-chrome.png" alt="Aperçu installation Ordinateur" class="img-aide-pwa">
+      </div>
+    </div>
   </div>
 
   <script src="app.js"></script>
