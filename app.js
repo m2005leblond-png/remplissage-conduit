@@ -158,7 +158,6 @@ function chargerCables() {
   Object.keys(cables).forEach(nom => {
     const opt = document.createElement("option");
     opt.value = nom;
-    // On ajoute la section en mm² directement au bout du nom dans l'option de la liste déroulante
     const secUnitaire = cables[nom].section;
     opt.textContent = `${nom} (${secUnitaire.toFixed(2)} mm²)`;
     typeCable.appendChild(opt);
@@ -240,7 +239,6 @@ function calculer() {
   let sectionTotale = 0;
   let detailCablesHtml = "";
   
-  // 1. Calculer la quantité totale de câbles et analyser les types présents
   let quantiteTotaleCables = 0;
   let uniquementRwRwu = true; 
 
@@ -257,10 +255,7 @@ function calculer() {
     }
   });
 
-  // 2. Récupérer la valeur décimale exacte (ex: 0.53, 0.40, 0.31...)
   const pourcentageSelectionne = seuilsRemplissage[nbFils.value];
-
-  // 3. Logique des avertissements (S'applique UNIQUEMENT s'il n'y a que du RW et/ou RWU)
   let avertissementHtml = "";
   
   if (uniquementRwRwu) {
@@ -304,7 +299,6 @@ function calculer() {
     `;
   }
 
-  // 4. Application à l'écran et au rapport PDF
   resultat.innerHTML = avertissementHtml + texteResultat;
 
   if (pdfContent) {
