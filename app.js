@@ -1,4 +1,4 @@
-const VERSION_APPLICATION = "v2.6";
+const VERSION_APPLICATION = "v2.7";
 
 document.addEventListener("DOMContentLoaded", () => {
   const elementVersion = document.getElementById("versionApp");
@@ -256,6 +256,7 @@ function calculer() {
   });
 
   const pourcentageSelectionne = seuilsRemplissage[nbFils.value];
+
   let avertissementHtml = "";
   
   if (uniquementRwRwu) {
@@ -356,6 +357,32 @@ document.addEventListener("DOMContentLoaded", () => {
     btnPdf.addEventListener("click", () => {
       calculer();
       window.print();
+    });
+  }
+
+  // ==========================================
+  // GESTIONNAIRE DE LA FENÊTRE MODALE D'INFO PWA
+  // ==========================================
+  const modalPwa = document.getElementById("modalPwa");
+  const btnInfoPwa = document.getElementById("btnInfoPwa");
+  const closePwa = document.querySelector(".close-pwa");
+
+  if (modalPwa && btnInfoPwa && closePwa) {
+    btnInfoPwa.addEventListener("click", () => {
+      modalPwa.style.display = "block";
+      document.body.style.overflow = "hidden"; // Empêche le défilement de l'arrière-plan
+    });
+
+    closePwa.addEventListener("click", () => {
+      modalPwa.style.display = "none";
+      document.body.style.overflow = "auto";
+    });
+
+    window.addEventListener("click", (event) => {
+      if (event.target === modalPwa) {
+        modalPwa.style.display = "none";
+        document.body.style.overflow = "auto";
+      }
     });
   }
 
